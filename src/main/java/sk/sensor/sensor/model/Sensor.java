@@ -3,10 +3,11 @@ package sk.sensor.sensor.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-public class Sensor {
+public class Sensor implements Serializable {
 
     @Id
     @GeneratedValue
@@ -16,7 +17,6 @@ public class Sensor {
     private Date date;
     private Double temperature;
 
-
     public Long getId() {
         return id;
     }
@@ -25,9 +25,7 @@ public class Sensor {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
+    public String getName() { return name; }
 
     public void setName(String name) {
         this.name = name;
