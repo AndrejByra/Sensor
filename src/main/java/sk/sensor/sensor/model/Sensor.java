@@ -1,9 +1,12 @@
 package sk.sensor.sensor.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.io.Serializable;
+import java.time.OffsetDateTime;
 import java.util.Date;
 
 @Entity
@@ -16,6 +19,7 @@ public class Sensor implements Serializable {
     private String room;
     private Date date;
     private Double temperature;
+
 
     public Long getId() {
         return id;
@@ -54,7 +58,6 @@ public class Sensor implements Serializable {
     public void setTemperature(Double temperature) {
         this.temperature = temperature;
     }
-
 
 
 }
