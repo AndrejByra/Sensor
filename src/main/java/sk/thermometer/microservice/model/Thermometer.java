@@ -1,22 +1,19 @@
-package sk.sensor.sensor.model;
+package sk.thermometer.microservice.model;
 
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.io.Serializable;
-import java.time.OffsetDateTime;
 import java.util.Date;
 
 @Entity
-public class Sensor implements Serializable {
+public class Thermometer implements Serializable {
 
     @Id
     @GeneratedValue
     private Long id;
-    private String name;
-    private String room;
+    private Long thermometerId;
     private Date date;
     private Double temperature;
 
@@ -29,18 +26,12 @@ public class Sensor implements Serializable {
         this.id = id;
     }
 
-    public String getName() { return name; }
-
-    public void setName(String name) {
-        this.name = name;
+    public Long getThermometerId() {
+        return thermometerId;
     }
 
-    public String getRoom() {
-        return room;
-    }
-
-    public void setRoom(String room) {
-        this.room = room;
+    public void setThermometerId(Long thermometerId) {
+        this.thermometerId = thermometerId;
     }
 
     public Date getDate() {

@@ -1,4 +1,4 @@
-package sk.sensor.sensor;
+package sk.thermometer.microservice;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

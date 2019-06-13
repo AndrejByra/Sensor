@@ -1,53 +1,51 @@
-package sk.sensor.sensor.service;
+package sk.thermometer.microservice.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
-import sk.sensor.sensor.model.Sensor;
-import sk.sensor.sensor.repository.SensorRepository;
+import sk.thermometer.microservice.model.Thermometer;
+import sk.thermometer.microservice.repository.ThermometerRepository;
 
-import java.time.OffsetDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/sensor")
-public class SensorService {
+public class ThermometerService {
 
     @Autowired
-    public SensorRepository sensorRepository;
+    public ThermometerRepository sensorRepository;
 
     @GetMapping("/findAll")
-    public List<Sensor> findAll() {
+    public List<Thermometer> findAll() {
         return sensorRepository.findAll();
     }
 
     @GetMapping("/{id}")
-    public Optional<Sensor> findById(@PathVariable("id") Long id) {
+    public Optional<Thermometer> findById(@PathVariable("id") Long id) {
         return sensorRepository.findById(id);
     }
 
     @GetMapping("/findByDateDesc")
-    public List<Sensor> findByDateDesc() {
+    public List<Thermometer> findByDateDesc() {
         return sensorRepository.findAllByOrderByDateDesc();
     }
 
     @GetMapping("/findByDateAsc")
-    public List<Sensor> findByDateAsc() {
+    public List<Thermometer> findByDateAsc() {
         return sensorRepository.findAllByOrderByDateAsc();
     }
 
     @GetMapping("{first}/{second}")
-    public List<Sensor> dateFilter(@PathVariable(value = "first") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date first,
-                                   @PathVariable(value = "second") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date second) {
+    public List<Thermometer> dateFilter(@PathVariable(value = "first") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date first,
+                                        @PathVariable(value = "second") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date second) {
         return sensorRepository.findAllByDateBetween(first, second);
     }
 
     @PostMapping("/add")
-    public Sensor addNewSensor(@RequestBody Sensor sensor) {
-        sensor.setName(sensor.getName());
-        sensor.setRoom(sensor.getRoom());
+    public Thermometer addNewSensor(@RequestBody Thermometer sensor) {
+
         sensor.setDate(sensor.getDate());
         sensor.setTemperature(sensor.getTemperature());
         return sensorRepository.save(sensor);
@@ -59,13 +57,11 @@ public class SensorService {
     }
 
     @PutMapping("/{id}")
-    public Sensor updateSensor(@PathVariable Long id, @RequestBody Sensor sensor) {
-        Sensor sensorUpdated = sensorRepository.getOne(id);
-        sensorUpdated.setName(sensor.getName());
-        sensorUpdated.setRoom(sensor.getRoom());
+    public Thermometer updateSensor(@PathVariable Long id, @RequestBody Thermometer sensor) {
+        Thermometer sensorUpdated = sensorRepository.getOne(id);
+
         sensorUpdated.setDate(sensor.getDate());
         sensorUpdated.setTemperature(sensor.getTemperature());
         return sensorRepository.save(sensorUpdated);
     }
-
 }
